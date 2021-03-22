@@ -1,0 +1,1 @@
+# Synology-Directory-Server-Hash-Extractor
