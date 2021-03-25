@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Some small businesses may use Synology Directory Server instead of a fully fledged Windows Server for a variety of reasons. Such a configuration is nearly identical in functionality, however, not fully. I came to be in a situation where I needed to test the strength of passwords at a given company, and that company was using their Synology NAS as their Domain Controller. Normally, I would use Mimikatz's DCSync module or manual extraction via sam.hiv and system.hiv to extract the hashes, however, DCSync seems to be broken (or otherwise disabled) with Synoloy's implementation and manual extraction the way that I was used to doing would be rather difficult since Synolgoy is running Linux, not Windows. 
+Some small businesses may use Synology Directory Server instead of a fully fledged Windows Server for a variety of reasons. Such a configuration is nearly identical in functionality, however, not fully. I came to be in a situation where I needed to test the strength of passwords at a given company, and that company was using their Synology NAS as their Domain Controller. Normally, I would use Mimikatz's DCSync module or manually dump via sam.hiv and system.hiv to extract the hashes, however, DCSync seems to be broken (maybe not implemented or just disabled?) with Synoloy's implementation and manual extraction the way that I was used to doing would be rather difficult since Synolgoy is running Linux, not Windows. 
 
 After some searching, I did not find any tools made to extract AD hashes from a Synology NAS running Directory Server, so I made one myself. :)
 
@@ -31,7 +31,7 @@ This script can be run with either python2.7 or with python3 on the target Synol
 On a Synology NAS running Directory Server
 
 ```
-admin@synology:/tmp$ sudo python dump.py
+admin@synology:/tmp$ sudo python extract.py
 -+= CRFSlick's Synology Directory Server Hash Extractor =+-
 [*] Running command... Done!
 [*] Writing output to "output.dat"
